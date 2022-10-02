@@ -9,7 +9,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 </head>
 <body>
-    
     <div id="app">
         <div>
             Id:
@@ -130,6 +129,50 @@
                 </tr>
             </tbody>
         </table>
+        <div>
+            Id:
+            <input type="text"  v-model="DepId">
+            Name:
+            <input type="text"  v-model="DepName">
+        </div>
+        <button type="button"
+        class="btn btn-primary m-2 fload-end"
+        @click="addDepartment()">
+         Add Department
+        </button>
+        <button type="button"
+        class="btn btn-primary m-2 fload-end"
+        @click="updateDepartment(DepId)">
+         Update Department
+        </button>
+        <button type="button"
+        class="btn btn-primary m-2 fload-end"
+        @click="deleteDepartmentById(DepId)">
+         Delete Department
+        </button>
+        <br>
+        <div>
+            SearchId:
+            <input type="text"  v-model="SearchDepId">
+        </div>
+        <button type="button"
+        class="btn btn-primary m-2 fload-end"
+        @click="searchDepartmentById(SearchDepId)">
+         Search Department
+        </button>
+        <strong>{{searchDepartmentIdA}}</strong>
+        <div>
+            SearchTitle:
+            <input type="text"  v-model="SearchDepTitle">
+            SearchName:
+            <input type="text"  v-model="SearchDepName">
+        </div>
+        <button type="button"
+        class="btn btn-primary m-2 fload-end"
+        @click="searchDepartmentByName(SearchDepTitle,SearchDepName)">
+         Search Department
+        </button>
+        <strong>{{searchDepartmentNameA}}</strong>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -143,12 +186,76 @@
                     
                 </tr>
             </thead>
+            
             <tbody>
                 <tr v-for="dep in Departments">
                     <td>{{dep.id}}</td>
                     <td>{{dep.name}}</td>
+                    <td>
+                        <button type="button"
+                        class="btn btn-light mr-1"
+                        @click="GetDepartmentData(dep)" >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                            </svg>
+                        </button>
+                        <button type="button" @click="deleteDepartmentById(dep.id)"
+                        class="btn btn-light mr-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                            </svg>
+                        </button>
+            
+                    </td>
             </tbody>
         </table>
+        <div>
+            Id:
+            <input type="text"  v-model="JobId">
+            Name:
+            <input type="text"  v-model="JobName">
+            Salary:
+            <input type="text"  v-model="JobSalary">
+        </div>
+        <button type="button"
+        class="btn btn-primary m-2 fload-end"
+        @click="addJob()">
+         Add Job
+        </button>
+        <button type="button"
+        class="btn btn-primary m-2 fload-end"
+        @click="updateJob(JobId)">
+         Update Job
+        </button>
+        <button type="button"
+        class="btn btn-primary m-2 fload-end"
+        @click="deleteJobById(JobId)">
+         Delete Job
+        </button>
+        <br>
+        <div>
+            SearchJobId:
+            <input type="text"  v-model="SearchJobId">
+        </div>
+        <button type="button"
+        class="btn btn-primary m-2 fload-end"
+        @click="searchJobById(SearchJobId)">
+         Search Job
+        </button>
+        <strong>{{searchJobIdA}}</strong>
+        <div>
+            SearchJobTitle:
+            <input type="text"  v-model="SearchJobTitle">
+            SearchJobName:
+            <input type="text"  v-model="SearchJobName">
+        </div>
+        <button type="button"
+        class="btn btn-primary m-2 fload-end"
+        @click="searchJobByName(SearchJobTitle,SearchJobName)">
+         Search Job
+        </button>
+        <strong>{{searchJobNameA}}</strong>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -168,6 +275,23 @@
                         <td>{{job.id}}</td>
                         <td>{{job.name}}</td>
                         <td>{{job.salary}}</td>
+                        <td>
+                            <button type="button"
+                            class="btn btn-light mr-1"
+                            @click="GetJobData(job)" >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                </svg>
+                            </button>
+                            <button type="button" @click="deleteJobById(job.id)"
+                            class="btn btn-light mr-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                                </svg>
+                            </button>
+                
+                        </td>
                 </tbody>
             </table>
         </div>
@@ -193,7 +317,22 @@
                 Department:0,
                 Job:0,
                 Sex:"Male/Female",
-                Img:""
+                Img:"",
+            searchDepartmentIdA:[],
+            searchDepartmentNameA:[],
+            SearchDepId:0,
+            SearchDepName:"",
+            SearchDepTitle:"",
+                DepId:0,
+                DepName:"",
+            searchJobIdA:[],
+            searchJobNameA:[],
+            SearchJobId:0,
+            SearchJobName:"",
+            SearchJobTitle:"",
+                JobId:0,
+                JobName:"",
+                JobSalary:0
         };},
         methods: {
             searchPersonalById(SearchId){
@@ -212,22 +351,49 @@
                 
             });},
 
-            deletePersonalById(Id){
-                axios.delete("https://localhost:7165/api/Personal/"+Id)
+            searchDepartmentById(SearchDepId){
+                axios.get("https://localhost:7165/api/Department/"+SearchDepId)
             .then((response)=>{
-                alert("Personel Silindi...")
-                this.refresh();
+                this.searchDepartmentIdA = response.data;
+                alert("Department Bulundu...")
+                
+            });},
+            
+            searchDepartmentByName(SearchDepTitle,SearchDepName){
+                axios.get("https://localhost:7165/api/Department/search/"+SearchDepTitle+"?name="+SearchDepName)
+            .then((response)=>{
+                this.searchDepartmentNameA = response.data;
+                alert("Department Bulundu...")
+                
             });},
 
+
+            searchJobById(SearchJobId){
+                axios.get("https://localhost:7165/api/Job/"+SearchJobId)
+            .then((response)=>{
+                this.searchJobIdA = response.data;
+                alert("Job Bulundu...")
+                
+            });},
+            
+            searchJobByName(SearchJobTitle,SearchJobName){
+                axios.get("https://localhost:7165/api/Job/search/"+SearchJobTitle+"?name="+SearchJobName)
+            .then((response)=>{
+                this.searchJobNameA = response.data;
+                alert("Job Bulundu...")
+                
+            });},
+            
+
             addPersonal(){
-                console.log("Id:"+this.Id,
+                /*console.log("Id:"+this.Id,
                 "Name:"+this.Name,
                 "Email:"+this.Email,
                 "Born:"+this.Born,
                 "Department:"+this.Department,
                 "Job:"+this.Job,
                 "Sex:"+this.Sex,
-                "Img:"+this.Img)
+                "Img:"+this.Img)*/
                 axios.post("https://localhost:7165/api/Personal",{
                 Id:this.Id,
                 Name:this.Name,
@@ -239,8 +405,34 @@
                 Img:this.Img
                 })
             .then((response)=>{
-                console.log("Personel Eklendi")
+                /*console.log("Personel Eklendi")*/
                 this.refresh();
+            });
+            },
+            addDepartment(){
+                /*console.log("Id:"+this.DepId,
+                "Name:"+this.DepName)*/
+                axios.post("https://localhost:7165/api/Department",{
+                Id:this.DepId,
+                Name:this.DepName
+                })
+            .then((response)=>{
+                /*console.log("Department Eklendi")*/
+                this.refreshDepartment();
+            });
+            },
+            addJob(){
+                /*console.log("Id:"+this.JobId,
+                "Name:"+this.JobName,
+                "Salary:"+this.JobSalary)*/
+                axios.post("https://localhost:7165/api/Job",{
+                Id:this.JobId,
+                Name:this.JobName,
+                Salary:this.JobSalary
+                })
+            .then((response)=>{
+                /*console.log("Job Eklendi")*/
+                this.refreshJob();
             });
             },
             GetPersonalData(per){
@@ -266,14 +458,76 @@
                 Img:this.Img
                 })
             .then((response)=>{
-                console.log("Güncellendi")
+                /*console.log("Personel Güncellendi")*/
                 this.refresh();
             });
             },
+            GetDepartmentData(dep){
+                this.DepId=dep.id,
+                this.DepName=dep.name
+            },
+            updateDepartment(Id){
+                axios.put("https://localhost:7165/api/Department/"+Id,{
+                
+                Id:this.DepId,
+                Name:this.DepName
+                })
+            .then((response)=>{
+                /*console.log("Department Güncellendi")*/
+                this.refreshDepartment();
+            });
+            },
+            GetJobData(job){
+                this.JobId=job.id,
+                this.JobName=job.name,
+                this.JobSalary=job.salary
+            },
+            updateJob(Id){
+                axios.put("https://localhost:7165/api/Job/"+Id,{
+                
+                Id:this.JobId,
+                Name:this.JobName,
+                Salary:this.JobSalary
+                })
+            .then((response)=>{
+                /*console.log("Job Güncellendi")*/
+                this.refreshJob();
+            });
+            },
+            deletePersonalById(Id){
+                axios.delete("https://localhost:7165/api/Personal/"+Id)
+            .then((response)=>{
+                alert("Personel Silindi...")
+                this.refresh();
+            });},
+            deleteJobById(Id){
+                axios.delete("https://localhost:7165/api/Job/"+Id)
+            .then((response)=>{
+                alert("Job Silindi...")
+                this.refreshJob();
+            });},
+            deleteDepartmentById(Id){
+                axios.delete("https://localhost:7165/api/Department/"+Id)
+            .then((response)=>{
+                alert("Department Silindi...")
+                this.refreshDepartment();
+            });},
             refresh(){
             axios.get("https://localhost:7165/api/Personal")
             .then((response)=>{
                 this.Personals=response.data
+            });
+            },
+            refreshJob(){
+            axios.get("https://localhost:7165/api/Job")
+            .then((response)=>{
+                this.Jobs=response.data
+            });
+            },
+            refreshDepartment(){
+            axios.get("https://localhost:7165/api/Department")
+            .then((response)=>{
+                this.Departments=response.data
             });
             }
         },
